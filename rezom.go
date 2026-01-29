@@ -58,7 +58,8 @@ func main() {
 	fmt.Println (err)
 	//return //
 	}
-	hipport := ipadr + ":8183" 
+	//hipport := ipadr + ":8183"
+	hipport := ":8183"
 	if fd, err = os.Open("om310dat.txt"); err != nil {
 	log.Fatal(err)
 	}
@@ -111,8 +112,6 @@ fmt.Printf("%s max %.1f:%s min %.1f:%s\n", namr[i][j], Max.D[i][j], Max.T[i][j],
 	http.HandleFunc("/uf3", plotuf3)
 	http.HandleFunc("/if3", ploti3a)
 	http.HandleFunc("/cosfi", plotcosfi)
-//	tend, ipadr, _ := parFromCommand()
-	//hipport := ipadr + ":8183" 
      	hlistener, err := net.Listen("tcp", hipport)
 		if err != nil {
         	log.Println("error starting net.Listen: ", err)			
@@ -279,3 +278,4 @@ func parFromCommand() (tb int, te int, ipadr string, err error) {
 		}
 	return tb, te, ipadr, err
 }	
+
