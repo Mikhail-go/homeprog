@@ -53,12 +53,10 @@ func main() {
 	var err error
 	var st, sd string
 	var s []string
-	begt, endt, ipadr, err := parFromCommand()
+	begt, endt, err := parFromCommand()
 	if err != nil {
 	fmt.Println (err)
-	//return //
 	}
-	//hipport := ipadr + ":8183"
 	hipport := ":8183"
 	if fd, err = os.Open("om310dat.txt"); err != nil {
 	log.Fatal(err)
@@ -177,10 +175,7 @@ func omdat(xs string) []uint16 {
 	return rx
 }
 func tnw(s string) int {
-	//fmt.Printf("%s\n", s)
 	t, _:= time.ParseDuration(s)
-	//ss := fmt.Sprintf("%.0f", t.Seconds()) //интервал округляем до целых секунд!
-	//is, _ := strconv.Atoi(ss)
 	it := int(t.Seconds())
 	return it
 }
@@ -264,18 +259,16 @@ func hformat(s string, mad []float64, mat []string, mid []float64, mit []string 
 		str += "</tr>"
 	return fmt.Sprintf(str, s, mad, mat, mid, mit)
 }
-func parFromCommand() (tb int, te int, ipadr string, err error) {
-	ipadr = "127.0.0.1"
+func parFromCommand() (tb int, te int, err error) {
 	tb = 0 // begin t
 	te = 3600 // end t 3600sec
 	err = nil
 	if len(os.Args) > 1 {
 		tb = tnw(os.Args[1])
 		if len(os.Args) > 2 { te = tnw(os.Args[2])}
-		if len(os.Args) > 3 { ipadr = os.Args[3]}
 	} else {
-		err =fmt.Errorf("command : rezom [min (begin time mmhh)] [max (end time mmhh)] [ip adrress]")
+		err =fmt.Errorf("command : rezom [min (begin time mmhh)] [max (end time mmhh)]")
 		}
-	return tb, te, ipadr, err
+	return tb, te, err
 }	
 
